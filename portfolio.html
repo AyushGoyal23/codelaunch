@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush Goyal — Software Engineer & Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #090a0f;
+            --surface: #12151e;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.35);
+            --accent: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glow Backgrounds */
+        .glow-1 {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-2 {
+            position: absolute;
+            top: 1200px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--surface-border);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(9, 10, 15, 0.75);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #818cf8;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            background: #818cf8;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #818cf8;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, #818cf8 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-sub {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-main);
+            border: 1px solid var(--surface-border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Metrics / Competitive Programming */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 60px 0 100px 0;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            padding: 24px;
+            border-radius: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            color: var(--text-main);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Section Header */
+        .section-header {
+            margin-bottom: 48px;
+        }
+
+        .section-tag {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 120px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tech-pill {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 6px;
+            color: #cbd5e1;
+        }
+
+        .project-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+        }
+
+        /* Skills Radar / Grid */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 120px;
+        }
+
+        .skill-group {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            padding: 24px;
+            border-radius: 16px;
+        }
+
+        .skill-group-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .skill-item {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-item::before {
+            content: '•';
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--surface-border);
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--text-main);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.75rem; }
+            .hero-sub { font-size: 1rem; }
+            .cta-group { flex-direction: column; width: 100%; }
+            .btn { text-align: center; }
+            nav { flex-direction: column; gap: 16px; align-items: flex-start; }
+            footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">AYUSH GOYAL</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#metrics">Stats</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero" id="about">
+            <div class="badge">
+                <span class="badge-dot"></span> First Year B.Tech CSE @ Amity University Noida
+            </div>
+            <h1>Building Scalable Systems & <span>Pixel-Perfect</span> Experiences.</h1>
+            <p class="hero-sub">I'm a software engineer and UI/UX architect specializing in high-concurrency systems, algorithmic optimization, and modern web applications targeted for FAANG-level engineering.</p>
+            <div class="cta-group">
+                <a href="#projects" class="btn btn-primary">View Engineered Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </section>
+
+        <!-- Performance Metrics / DSA Stats -->
+        <section id="metrics">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">650+</div>
+                    <div class="stat-label">LeetCode Problems</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2140</div>
+                    <div class="stat-label">Knight Rating (Top 1.8%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99.8</div>
+                    <div class="stat-label">System Performance %</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Production Modules</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <div class="section-header">
+                <span class="section-tag">// Engineering & System Architecture</span>
+                <h2>Featured Projects</h2>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div>
+                        <div class="project-title">Distributed Cache Layer</div>
+                        <p class="project-desc">Engineered an in-memory key-value cache store with LRU eviction, achieving sub-millisecond latencies under concurrent load using custom lock-free data structures.</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">C++20</span>
+                            <span class="tech-pill">gRPC</span>
+                            <span class="tech-pill">Distributed Systems</span>
+                            <span class="tech-pill">Docker</span>
+                        </div>
+                    </div>
+                    <a href="#" class="project-link">Architecture Spec & Architecture →</a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div>
+                        <div class="project-title">Aether — Real-Time Collaborative Canvas</div>
+                        <p class="project-desc">A vector graphic editor driven by Conflict-Free Replicated Data Types (CRDTs) for seamless multi-user collaboration with zero-latency visual updates.</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">TypeScript</span>
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">WebSockets</span>
+                            <span class="tech-pill">Canvas API</span>
+                        </div>
+                    </div>
+                    <a href="#" class="project-link">Live Experience →</a>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div>
+                        <div class="project-title">Custom Compiler Engine</div>
+                        <p class="project-desc">Built a lightweight lexer, parser, and abstract syntax tree (AST) generator for a custom functional domain-specific language optimized for data transformations.</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">Rust</span>
+                            <span class="tech-pill">LLVM</span>
+                            <span class="tech-pill">Compilers</span>
+                        </div>
+                    </div>
+                    <a href="#" class="project-link">View Source Code →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <div class="section-header">
+                <span class="section-tag">// Technical Matrix</span>
+                <h2>Core Capabilities</h2>
+            </div>
+
+            <div class="skills-container">
+                <div class="skill-group">
+                    <div class="skill-group-title">Languages</div>
+                    <ul class="skill-list">
+                        <li class="skill-item">C++ (STL, Concurrency)</li>
+                        <li class="skill-item">Java (Spring Core)</li>
+                        <li class="skill-item">TypeScript / JavaScript</li>
+                        <li class="skill-item">Python</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-title">CS Fundamentals</div>
+                    <ul class="skill-list">
+                        <li class="skill-item">Data Structures & Algos</li>
+                        <li class="skill-item">System Architecture</li>
+                        <li class="skill-item">Operating Systems & OS Kernels</li>
+                        <li class="skill-item">Database Internals</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-title">Full Stack & Systems</div>
+                    <ul class="skill-list">
+                        <li class="skill-item">React / Next.js</li>
+                        <li class="skill-item">Node.js / Express</li>
+                        <li class="skill-item">PostgreSQL / Redis</li>
+                        <li class="skill-item">Docker / Kubernetes</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-title">UI/UX & Design</div>
+                    <ul class="skill-list">
+                        <li class="skill-item">Figma Design Systems</li>
+                        <li class="skill-item">Micro-Interactions</li>
+                        <li class="skill-item">Design Tokens & Systems</li>
+                        <li class="skill-item">Accessiblity (WCAG 2.1)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div>
+                Designed & Engineered by <strong>Ayush Goyal</strong> © 2026
+            </div>
+            <div class="social-links">
+                <a href="#">GitHub</a>
+                <a href="https://www.linkedin.com/in/ayush-goyal-460027371/" target="_blank">LinkedIn</a>
+                <a href="#">LeetCode</a>
+                <a href="#">X (Twitter)</a>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
